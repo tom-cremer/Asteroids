@@ -194,3 +194,4 @@ dist
 # TernJS port file
 .tern-port
 /mix-manifest.json
+/hot
