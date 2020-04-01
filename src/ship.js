@@ -1,3 +1,5 @@
+import controller from './controller'
+
 const ship = {
 
   size: 20,
@@ -7,23 +9,17 @@ const ship = {
   ctx: null,
 
   init (canvas, ctx) {
-    document.addEventListener('keydown', (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      if (e.key === 'ArrowRight') {
-        this.speedX += 0.2
-      }
-      if (e.key === 'ArrowLeft') {
-        this.speedX -= 0.2
-      }
-
-    })
+    controller.init()
     this.canvas = canvas
     this.ctx = ctx
     this.locationX = this.canvas.width / 2
   },
 
   update () {
+    controller.activeKeys.forEach((activeKey) => {
+      this.speedX += controller.keys[activeKey] * 0.05
+    })
+
     this.locationX += this.speedX
     if (this.locationX > this.canvas.width + this.size) {
       this.locationX = -this.size
