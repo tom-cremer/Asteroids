@@ -5,7 +5,7 @@ const ship = {
 
   size: 20,
   speed: null,
-  heading: Math.PI/2,
+  heading: 0,
   location: null,
   acceleration: null,
   canvas: null,
@@ -22,7 +22,11 @@ const ship = {
 
   update () {
     controller.activeKeys.forEach((activeKey) => {
-      this.speed.add(this.acceleration)
+      if (activeKey === 'ArrowUp') {
+        this.speed.add(this.acceleration)
+      } else if (activeKey === 'ArrowRight' || activeKey === 'ArrowLeft') {
+        this.updateHeading(controller.keys[activeKey])
+      }
     })
 
     this.location.add(this.speed)
@@ -35,7 +39,9 @@ const ship = {
     }
     this.draw()
   },
-
+  updateHeading (angle) {
+    this.heading += angle
+  },
   draw () {
     this.ctx.save()
     this.ctx.translate(this.canvas.width / 2, this.location.y)
