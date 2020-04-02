@@ -1,5 +1,6 @@
 import controller from './controller'
 import Vector from './Vector'
+import Bullet from './Bullet'
 
 const ship = {
 
@@ -10,6 +11,9 @@ const ship = {
   acceleration: null,
   canvas: null,
   ctx: null,
+  bulletTimer: -1,
+  bulletTimerTreshold: 10,
+  bullets: [],
 
   init (canvas, ctx) {
     controller.init()
@@ -26,6 +30,12 @@ const ship = {
         this.speed.add(this.acceleration)
       } else if (activeKey === 'ArrowRight' || activeKey === 'ArrowLeft') {
         this.updateHeading(controller.keys[activeKey])
+      } else if (activeKey === ' ') {
+        this.bulletTimer++
+        if (!(this.bulletTimer % this.bulletTimerTreshold))
+          this.bullets.push(new Bullet())
+      } else {
+        this.bulletTimer = 0
       }
     })
     this.speed.multiply(0.97)

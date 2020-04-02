@@ -3,6 +3,7 @@ const controller = {
     'ArrowUp': -1,
     'ArrowRight': Math.PI / 15,
     'ArrowLeft': -Math.PI / 15,
+    ' ': 1
   },
   activeKeys: [],
   init () {
