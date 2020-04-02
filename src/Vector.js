@@ -13,4 +13,13 @@ export default class Vector {
     this.x *= factor
     this.y *= factor
   }
+
+  static fromAngle (angle, magnitude) {
+    let mag = 1
+    if (typeof magnitude !== 'undefined') {
+      mag = magnitude
+    }
+
+    return new Vector(mag * Math.cos(angle - Math.PI / 2), mag * Math.sin(angle - Math.PI / 2))
+  }
 }
