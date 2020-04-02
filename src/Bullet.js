@@ -14,7 +14,20 @@ export default class Bullet {
 
   update () {
     this.location.add(this.speed)
+    this.checkEdges()
+
     this.draw()
+  }
+
+  checkEdges () {
+    if (
+      (this.location.y > ship.canvas.height) ||
+      (this.location.y < 0) ||
+      (this.location.x > ship.canvas.width) ||
+      (this.location.x < 0)
+    ) {
+      ship.removeBullet(this)
+    }
   }
 
   draw () {

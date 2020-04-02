@@ -41,6 +41,11 @@ const ship = {
     this.speed.multiply(0.97)
     this.location.add(this.speed)
 
+    this.checkEdges()
+    this.draw()
+  },
+
+  checkEdges () {
     if (this.location.y > this.canvas.height + this.size) {
       this.location.y = -this.size
     }
@@ -53,11 +58,17 @@ const ship = {
     if (this.location.x < -this.size) {
       this.location.x = this.canvas.width + this.size
     }
-    this.draw()
   },
+
   updateHeading (angle) {
     this.heading += angle
   },
+
+  removeBullet (bullet) {
+    const i = this.bullets.indexOf(bullet)
+    this.bullets.splice(i, 1)
+  },
+
   draw () {
     this.ctx.save()
     this.ctx.translate(this.location.x, this.location.y)
