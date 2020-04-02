@@ -7,16 +7,16 @@ const controller = {
   activeKeys: [],
   init () {
     document.addEventListener('keydown', (e) => {
-      e.preventDefault()
-      e.stopPropagation()
       if (Object.keys(this.keys).includes(e.key) && !this.activeKeys.includes(e.key)) {
+        e.preventDefault()
+        e.stopPropagation()
         this.activeKeys.push(e.key)
       }
     })
     document.addEventListener('keyup', (e) => {
-      e.preventDefault()
-      e.stopPropagation()
       if (this.activeKeys.includes(e.key)) {
+        e.preventDefault()
+        e.stopPropagation()
         const i = this.activeKeys.indexOf(e.key)
         this.activeKeys.splice(i, 1)
       }
