@@ -1,4 +1,5 @@
 import ship from './ship'
+import Asteroid from './Asteroid'
 
 const main = {
   mainElt: null,
@@ -8,6 +9,8 @@ const main = {
     height: 480
   },
   ctx: null,
+  asteroids: [],
+  asteroidsCount: 4,
 
   init () {
     this.mainElt = document.getElementById('asteroids')
@@ -21,6 +24,10 @@ const main = {
     this.ctx = this.canvasElt.getContext('2d')
     this.ctx.strokeStyle = '#fff'
     this.ctx.fillStyle = '#fff'
+
+    for (let i = 0; i < 4; i++){
+      this.asteroids.push(new Asteroid())
+    }
 
     ship.init(this.canvasElt, this.ctx)
     this.animate()
@@ -39,13 +46,3 @@ const main = {
 }
 
 main.init()
-
-const asteroidSize = 20
-
-function asteroidDraw () {
-  ctx.save()
-  ctx.rotate(0.1)
-  ctx.translate(50, 50)
-  ctx.strokeRect(-asteroidSize / 2, -asteroidSize / 2, asteroidSize, asteroidSize)
-  ctx.restore()
-}
