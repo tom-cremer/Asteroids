@@ -25,8 +25,8 @@ const main = {
     this.ctx.strokeStyle = '#fff'
     this.ctx.fillStyle = '#fff'
 
-    for (let i = 0; i < 4; i++){
-      this.asteroids.push(new Asteroid())
+    for (let i = 0; i < 4; i++) {
+      this.asteroids.push(new Asteroid(this.canvasElt, this.ctx))
     }
 
     ship.init(this.canvasElt, this.ctx)
@@ -41,6 +41,9 @@ const main = {
     ship.update()
     ship.bullets.forEach((bullet) => {
       bullet.update()
+    })
+    this.asteroids.forEach((asteroid) => {
+      asteroid.update()
     })
   }
 }
