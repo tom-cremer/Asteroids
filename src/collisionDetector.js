@@ -1,14 +1,15 @@
 const collisionDetector = {
   detect (ctx, ship, asteroids) {
-    ship.bullets.forEach(bullet => {
-      asteroids.forEach(asteroid => {
-        if (ctx.isPointInPath(asteroid.path,
-          bullet.location.x - asteroid.location.x,
-          bullet.location.y - asteroid.location.y)) {
-          console.log('Collision')
+    for (let i = 0; i < ship.bullets.length; i++) {
+      for (let j = 0; j < asteroids.length; j++) {
+        if (ctx.isPointInPath(asteroids[j].path,
+          ship.bullets[i].location.x - asteroids[j].location.x,
+          ship.bullets[i].location.y - asteroids[j].location.y)) {
+          return { bullet: ship.bullets[i], asteroid: asteroids[j] }
         }
-      })
-    })
+      }
+    }
+    return false
   }
 }
 

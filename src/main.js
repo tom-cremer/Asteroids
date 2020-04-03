@@ -1,6 +1,7 @@
 import ship from './ship'
 import Asteroid from './Asteroid'
 import collisionDetector from './collisionDetector'
+import garbageManager from './garbageManager'
 
 const main = {
   mainElt: null,
@@ -46,7 +47,13 @@ const main = {
     this.asteroids.forEach((asteroid) => {
       asteroid.update()
     })
-    collisionDetector.detect(this.ctx, ship, this.asteroids)
+    if (ship.bullets.length && this.asteroids.length) {
+      const collidingPair = collisionDetector.detect(this.ctx, ship, this.asteroids)
+      if (collidingPair) {
+        garbageManager.remove(collidingPair.bullet, ship.bullets)
+        garbageManager.remove(collidingPair.asteroid, this.asteroids)
+      }
+    }
   }
 }
 
