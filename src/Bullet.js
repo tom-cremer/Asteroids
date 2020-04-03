@@ -34,7 +34,7 @@ export default class Bullet {
     this.ctx.save()
     this.ctx.translate(this.location.x, this.location.y)
     this.ctx.rotate(this.heading)
-    this.ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size)
+    this.ctx.fillRect(-this.size / 2, -this.size * 3, this.size, this.size)
     this.ctx.restore()
   }
 }

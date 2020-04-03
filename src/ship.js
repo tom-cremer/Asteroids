@@ -12,7 +12,7 @@ const ship = {
   canvas: null,
   ctx: null,
   bulletTimer: -1,
-  bulletTimerTreshold: 10,
+  bulletTimerTreshold: 5,
   bullets: [],
 
   init (canvas, ctx) {
@@ -23,7 +23,7 @@ const ship = {
     this.speed = new Vector(0, 0)
   },
 
-  update () {
+  checkKeys () {
     controller.activeKeys.forEach((activeKey) => {
       if (activeKey === 'ArrowUp') {
         this.acceleration = Vector.fromAngle(this.heading)
@@ -35,9 +35,13 @@ const ship = {
         if (!(this.bulletTimer % this.bulletTimerTreshold))
           this.bullets.push(new Bullet())
       } else {
-        this.bulletTimer = 0
+        this.bulletTimer = -1
       }
     })
+  },
+
+  update () {
+    this.checkKeys()
     this.speed.multiply(0.97)
     this.location.add(this.speed)
 
