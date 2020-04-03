@@ -12,7 +12,7 @@ const main = {
   },
   ctx: null,
   asteroids: [],
-  asteroidsCount: 2,
+  asteroidsCount: 1,
 
   init () {
     this.mainElt = document.getElementById('asteroids')
@@ -51,8 +51,18 @@ const main = {
       const collidingPair = collisionDetector.detect(this.ctx, ship, this.asteroids)
       if (collidingPair) {
         garbageManager.remove(collidingPair.bullet, ship.bullets)
+        if (collidingPair.asteroid.size > 4) {
+          this.generateSmallAsteroids(collidingPair.asteroid)
+        }
         garbageManager.remove(collidingPair.asteroid, this.asteroids)
       }
+    }
+  },
+
+  generateSmallAsteroids (parentAsteroid) {
+    const childrenCount = Math.floor(2 + Math.random() * 3)
+    for (let i = 0; i < childrenCount; i++) {
+      this.asteroids.push(new Asteroid(this.canvasElt, this.ctx, parentAsteroid))
     }
   }
 }
