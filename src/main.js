@@ -12,7 +12,8 @@ const main = {
   },
   ctx: null,
   asteroids: [],
-  asteroidsCount: 1,
+  asteroidsCount: 6,
+  requestId:0,
 
   init () {
     this.mainElt = document.getElementById('asteroids')
@@ -36,7 +37,7 @@ const main = {
   },
 
   animate () {
-    window.requestAnimationFrame(() => {
+    this.requestId = window.requestAnimationFrame(() => {
       this.animate()
     })
     this.ctx.clearRect(0, 0, this.canvasElt.width, this.canvasElt.height)
@@ -48,13 +49,18 @@ const main = {
       asteroid.update()
     })
     if (ship.bullets.length && this.asteroids.length) {
-      const collidingPair = collisionDetector.detect(this.ctx, ship, this.asteroids)
+      const collidingPair = collisionDetector.detectBulletAsteroidCollision(this.ctx, ship, this.asteroids)
       if (collidingPair) {
         garbageManager.remove(collidingPair.bullet, ship.bullets)
         if (collidingPair.asteroid.size > 4) {
           this.generateSmallAsteroids(collidingPair.asteroid)
         }
         garbageManager.remove(collidingPair.asteroid, this.asteroids)
+      }
+    }
+    if (ship && this.asteroids.length) {
+      if(collisionDetector.detectShipAsteroidCollision(this.ctx, ship, this.asteroids)){
+        window.cancelAnimationFrame(this.requestId)
       }
     }
   },
