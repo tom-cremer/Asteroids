@@ -1,5 +1,6 @@
 import ship from './ship'
 import Asteroid from './Asteroid'
+import collisionDetector from './collisionDetector'
 
 const main = {
   mainElt: null,
@@ -10,7 +11,7 @@ const main = {
   },
   ctx: null,
   asteroids: [],
-  asteroidsCount: 4,
+  asteroidsCount: 2,
 
   init () {
     this.mainElt = document.getElementById('asteroids')
@@ -25,7 +26,7 @@ const main = {
     this.ctx.strokeStyle = '#fff'
     this.ctx.fillStyle = '#fff'
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < this.asteroidsCount; i++) {
       this.asteroids.push(new Asteroid(this.canvasElt, this.ctx))
     }
 
@@ -45,6 +46,7 @@ const main = {
     this.asteroids.forEach((asteroid) => {
       asteroid.update()
     })
+    collisionDetector.detect(this.ctx, ship, this.asteroids)
   }
 }
 
