@@ -1,5 +1,6 @@
 import Vector from './Vector'
 import ship from './ship'
+import garbageManager from './garbageManager'
 
 export default class Bullet {
   constructor () {
@@ -26,7 +27,7 @@ export default class Bullet {
       (this.location.x > ship.canvas.width) ||
       (this.location.x < 0)
     ) {
-      ship.removeBullet(this)
+      garbageManager.remove(this, ship.bullets)
     }
   }
 

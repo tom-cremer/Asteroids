@@ -35,7 +35,6 @@ const main = {
     ship.bullets.forEach((bullet) => {
       bullet.update()
     })
-    console.log(ship.bullets)
   }
 }
 
