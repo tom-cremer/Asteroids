@@ -5,7 +5,7 @@ export default class Asteroid {
   constructor (canvas, ctx) {
     this.canvas = canvas
     this.ctx = ctx
-    this.size = 10
+    this.size = 7 + Math.random() * 5
     this.heading = Math.random() * Math.PI * 2
     this.location = new Vector(Math.random() * this.canvas.width, Math.random() * this.canvas.height)
     this.speed = new Vector(0, 0)
@@ -18,7 +18,24 @@ export default class Asteroid {
 
   update () {
     this.location.add(this.speed)
+    this.checkEdges()
     this.draw()
+  }
+
+  checkEdges () {
+    const offset = 50
+    if (this.location.y > this.canvas.height + offset) {
+      this.location.y = -offset
+    }
+    if (this.location.y < -offset) {
+      this.location.y = this.canvas.height + offset
+    }
+    if (this.location.x > this.canvas.width + offset) {
+      this.location.x = -offset
+    }
+    if (this.location.x < -offset) {
+      this.location.x = this.canvas.width + offset
+    }
   }
 
   draw () {
