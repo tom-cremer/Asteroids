@@ -74,3 +74,4 @@ const main = {
 }
 
 main.init()
+console.log('main.js');
