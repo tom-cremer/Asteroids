@@ -5,7 +5,6 @@ import {IPosition} from "../types/IPosition";
 export class Triangle extends Shape {
     protected width: number;
     protected height: number;
-    private rotate: number;
 
 
     constructor(ctx: CanvasRenderingContext2D, position: IPosition, width: number, height: number, color: IColor, degree: number = 0, isFilled: boolean = true) {

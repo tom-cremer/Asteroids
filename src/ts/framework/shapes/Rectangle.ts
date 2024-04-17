@@ -3,8 +3,8 @@ import {IColor} from "../types/IColor";
 import {IPosition} from "../types/IPosition";
 
 export class Rectangle extends Shape {
-    private readonly w: number;
-    private readonly h: number;
+    protected w: number;
+    protected h: number;
 
     constructor(ctx: CanvasRenderingContext2D, position: IPosition, w: number, h: number, color: IColor, degree: number = 0, isFilled: boolean = true) {
         super(ctx, position, color, degree, isFilled);
